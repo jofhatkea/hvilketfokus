@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dynamic Web</title>
+    <title>Hvilket område?</title>
     <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave" rel="stylesheet">
     
     <style>
+      :root {
+        --topicwidth: calc(20vh - 20px);
+      }
         * {
             margin:0;
             padding:0;
@@ -22,10 +25,10 @@
         }
         
         .topic {
-            width: calc(20vh - 20px);
-            height: calc(20vh - 20px);
-            left: 50vw;
-            top: 80vh;
+            width: var(--topicwidth);
+            height: var(--topicwidth);
+            left: calc(50vw - 10vh);
+            top: 40vh;
             background: yellow;
             margin: 10px;
             flex-grow: 1;
@@ -33,9 +36,26 @@
             box-shadow: 2px 2px 5px #888888;
             position:absolute;
         }
-        /*not used**/
+        
       .fo {
-        border: 2px solid #000;
+        border: 1px solid #000;
+
+      }
+      .fo h1 {
+        text-align:center;
+        padding-top: 1em;
+      }
+      .fo:first-child {
+        border-width: 0 1px 1px 0;
+      }
+      .fo:nth-child(2){
+        border-width: 0 0 1px 0;
+      }
+      .fo:nth-child(3){
+        border-width: 0 1px 0 0;
+      }
+      .fo:nth-child(4){
+        border-width:0;
       }
       .topic.dev {
         background: #c0ffee;
@@ -54,7 +74,6 @@
 <body>
     
     <div id="progress">
-        <!--<svg id="interactive"></svg>-->
         <div class="fo visualisering"><h1>Visualisering</h1></div>
         <div class="fo kommunikation"><h1>Kommunikation</h1></div>
         <div class="fo forretning"><h1>Forretning</h1></div>

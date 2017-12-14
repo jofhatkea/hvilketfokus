@@ -3,13 +3,14 @@ function main() {
   let paint;
   let data = JSON.parse(window.localStorage.getItem("fodata"));
   if (!data) {
-    //TODO tror ikke jeg bruger X, træt af at slås med greensocks transforms
-    //1 lær at læse/parse matrix
     data = {
-      0: { t: "SEO", x: "", y: "" },
-      1: { t: "Using the WP Admin interface", x: "", y: "" },
-      2: { t: "CSS", x: "", y: "" },
-      3: { t: "Styletiles", x: "", y: "" }
+      0: { t: "SEO", FBE: "br", you:""},
+      1: { t: "Using the WP Admin interface", FBE:"" , you:""},
+      2: { t: "CSS", FBE:"" , you:""},
+      3: { t: "Styletiles", FBE:"" , you:""},
+      4: { t: "Video", FBE:"", you:""},
+      5: { t: "HTML", FBE:"", you:""},
+      6: { t: "Versionsstyring", FBE:"", you:""}
     };
     window.localStorage.setItem("fodata", JSON.stringify(data));
   }
@@ -21,7 +22,7 @@ function main() {
     bl: "#F0F0F0"
   };
 
-  function loaded() {
+  +function loaded() {
     paint = document.querySelector("#progress");
     for (let i = 0; i < Object.keys(data).length; i++) {
       let d = document.createElement("div");
@@ -30,10 +31,10 @@ function main() {
         let p = document.createElement("p");
         p.innerHTML = data[i].t;
         d.dataset.fokey = i;
-        if (data[i].x) {
+        /*if (data[i].x) {
           d.style.left = data[i].x;
           console.log(d);
-        }
+        }*/
         d.appendChild(p);
       }
       d.addEventListener("mouseenter", e => {
@@ -45,17 +46,18 @@ function main() {
       paint.appendChild(d);
     }
     animate();
-  }
+  }()
 
   function animate() {
     let tl = new TimelineMax();
     let days = document.querySelectorAll(".topic");
     tl.delay(1).fromTo(
       days,
-      2.3,
+      .8,
       {
         x: () => Math.random() * 400 - 200,
         y: () => Math.random() * 400 - 200,
+        scale:0,
         autoAlpha: 0,
         zIndex: () => Math.random() * 20,
         ease: Elastic.easeOut.config(1, 0.3)
@@ -63,6 +65,7 @@ function main() {
       {
         x: 0,
         y: 0,
+        scale:1,
         rotation: () => Math.random() * 360 - 180,
         autoAlpha: 1
       }
@@ -91,8 +94,7 @@ function main() {
         } else {
           pos += "r";
         }
-        data[d.target.dataset.fokey].x = x;
-        data[d.target.dataset.fokey].y = y;
+        data[d.target.dataset.fokey].you = pos;
         d.target.style.background = colors[pos];
         window.localStorage.setItem("fodata", JSON.stringify(data));
       });
